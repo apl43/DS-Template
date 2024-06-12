@@ -1,4 +1,4 @@
-class UnionFind():
+class UnionFind:
     def __init__(self, size):
         self.fa = list(range(size))
     
