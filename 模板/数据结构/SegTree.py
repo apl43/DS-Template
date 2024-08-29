@@ -5,7 +5,7 @@ class SegTree:
         self.sum = [0] * (2 << self.n.bit_length())
         self.min = [0] * (2 << self.n.bit_length())
         self.max = [0] * (2 << self.n.bit_length())
-        self._build(self, 0, 0, self.n - 1)
+        self._build(0, 0, self.n - 1)
 
 
     def _build(self, o: int, l: int, r: int) -> None:
@@ -19,7 +19,7 @@ class SegTree:
 
 
     def add(self, idx: int, val: int) -> None:
-        self._add(self, 0, 0, self.n - 1, idx, val)
+        self._add(0, 0, self.n - 1, idx, val)
     def _add(self, o: int, l: int, r: int, idx: int, val: int) -> None:
         if l == r:
             self.sum[o] += val
@@ -42,7 +42,7 @@ class SegTree:
 
     # 查找区间sum
     def query_sum(self, L: int, R: int) -> int:
-        return self._query_sum(self, 0, 0, self.n - 1, L, R)
+        return self._query_sum(0, 0, self.n - 1, L, R)
     def _query_sum(self, o: int, l: int, r: int, L: int, R: int) -> int:
         if L <= l and r <= R:
             return self.sum[o]
@@ -61,7 +61,7 @@ class SegTree:
 
     # 查找区间min
     def query_min(self, L: int, R: int) -> int:
-        return self._query_min(self, 0, 0, self.n - 1, L, R)
+        return self._query_min(0, 0, self.n - 1, L, R)
     def _query_min(self, o: int, l: int, r: int, L: int, R: int) -> int:
         if L <= l and r <= R:
             return self.min[o]
@@ -76,7 +76,7 @@ class SegTree:
 
     # 更新单点max
     def update_max(self, idx: int, val: int) -> None:
-        self._update_max(self, 0, 0, self.n - 1, idx, val)
+        self._update_max(0, 0, self.n - 1, idx, val)
     def _update_max(self, o: int, l: int, r: int, idx: int, val: int) -> None:
         if l == r:
             self.nums[idx] = val
@@ -92,7 +92,7 @@ class SegTree:
 
     # 查找区间max
     def query_max(self, L: int, R: int) -> int:
-        return self._query_max(self, 0, 0, self.n - 1, L, R)
+        return self._query_max(0, 0, self.n - 1, L, R)
     def _query_max(self, o: int, l: int, r: int, L: int, R: int) -> int:
         if L <= l and r <= R:
             return self.max[o]
@@ -108,7 +108,7 @@ class SegTree:
     # 返回 [L, R] 中 > val 的最小下标
     # 不存在就返回 -1
     def query1(self, L: int, R: int, val: int) -> int:
-        return self._query1(self, 0, 0, self.n - 1, L, R, val)
+        return self._query1(0, 0, self.n - 1, L, R, val)
     def _query1(self, o: int, l: int, r: int, L: int, R: int, val: int) -> int:
         if self.max[o] <= val:
             return -1
@@ -129,7 +129,7 @@ class SegTree:
     # 返回 [L, R] 中 <= val 的最小下标
     # 不存在就返回 -1
     def query2(self, L: int, R: int, val: int) -> int:
-        return self._query2(self, 0, 0, self.n - 1, L, R, val)
+        return self._query2(0, 0, self.n - 1, L, R, val)
     def _query2(self, o: int, l: int, r: int, L: int, R: int, val: int) -> int:
         if self.min[o] > val:
             return -1
