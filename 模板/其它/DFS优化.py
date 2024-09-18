@@ -16,3 +16,6 @@ def bootstrap(f, stack=[]):
                     to = stack[-1].send(to)
             return to
     return wrappedfunc
+
+
+# 注意在函数前加 yield
