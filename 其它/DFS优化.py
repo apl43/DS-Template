@@ -18,4 +18,4 @@ def bootstrap(f, stack=[]):
     return wrappedfunc
 
 
-# 注意 res 改 yield
+# res 改 yield
