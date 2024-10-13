@@ -1,25 +1,24 @@
 MOD = 10 ** 9 + 7
-n, k = map(int, input().split())
-g = [list(map(int, input().split())) for _ in range(n)]
 
-def f(x, y):
-    n = len(x)
-    res = [[0] * n for _ in range(n)]
+
+def multiply_matrices(e, p):
+    n, m, l = len(e), len(p[0]), len(e[0])
+    res = [[0] * m for _ in range(n)]
     for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                res[i][j] += x[i][k] * y[k][j]
+        for j in range(m):
+            for k in range(l):
+                res[i][j] += e[i][k] * p[k][j]
                 res[i][j] %= MOD
     return res
 
-ans = [[0] * n for _ in range(n)]
-for i in range(n):
-    ans[i][i] = 1
+f = None
+base = None
+k = None
 
 while k:
     if k & 1:
-        ans = f(ans, g)
-    g = f(g, g)
+        f = multiply_matrices(f, base)
+    base = multiply_matrices(base, base)
     k >>= 1
-for row in ans:
-    print(" ".join(map(str, row)))
+
+print()
