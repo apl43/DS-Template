@@ -101,7 +101,6 @@ nums = [1, 5, 4, 2, 3]
 n = len(nums)
 g = LazySegTree(nums)
 
-
 def p():
     print([g.query_sum(i, i) for i in range(n)])
 
