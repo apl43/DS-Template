@@ -107,7 +107,6 @@ def p():
 p()
 print(g.query_sum(1, 3))
 g.update_sum1(1, 2, 2)
-# p()
 print(g.query_sum(2, 3))
 g.update_sum1(0, 4, 1)
 print(g.query_sum(0, 3))
