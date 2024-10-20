@@ -21,7 +21,7 @@ def kmp(text, pattern):
         if st == m:
             res.append(i - m + 1)
             st = pi[st - 1]
-    return res[0] if res else -1
+    return res
 
 
 print(kmp("abacabab", "abab"))
