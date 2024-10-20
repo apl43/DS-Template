@@ -12,25 +12,16 @@ def kmp(text, pattern):
         pi[i] = st
     
     st = 0
-    # 输出多个可重叠的 pattern 下标
-    # res = []
-
+    res = []
     for i, v in enumerate(text):
         while st and pattern[st] != v:
             st = pi[st - 1]
         if pattern[st] == v:
             st += 1
-
-    # 输出一个
-        if st == len(pattern):
-            return i - m + 1
-    return -1
-            
-    # 输出多个
-    #     if st == len(pattern):
-    #         res.append(i - m + 1)
-    #         st = pi[st - 1]
-    # return res
+        if st == m:
+            res.append(i - m + 1)
+            st = pi[st - 1]
+    return res[0] if res else -1
 
 
 print(kmp("abacabab", "abab"))
