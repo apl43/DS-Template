@@ -6,4 +6,5 @@ for i in range(2, MX):
     for j in range(i, MX, i):
         if LPF[j] == 0:
             LPF[j] = i
+            
 # print(LPF)
