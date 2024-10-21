@@ -1,26 +1,34 @@
+from math import inf
+
+
 class SegTree:
     def __init__(self, nums):
         self.nums = nums
         self.n = len(nums)
         self.sum = [0] * (2 << self.n.bit_length())
-        self.min = [0] * (2 << self.n.bit_length())
-        self.max = [0] * (2 << self.n.bit_length())
+        self.min = [inf] * (2 << self.n.bit_length())
+        self.max = [-inf] * (2 << self.n.bit_length())
         self._build(0, 0, self.n - 1)
 
 
     def _build(self, o: int, l: int, r: int) -> None:
         if l == r:
+            self.sum[o] = self.nums[l]
+            self.min[o] = self.nums[l]
             self.max[o] = self.nums[l]
             return
         m = (l + r) // 2
         self._build(o * 2 + 1, l, m)
         self._build(o * 2 + 2, m + 1, r)
+        self.sum[o] = self.sum[o * 2 + 1] + self.sum[o * 2 + 2]
+        self.min[o] = min(self.min[o * 2 + 1], self.min[o * 2 + 2])
         self.max[o] = max(self.max[o * 2 + 1], self.max[o * 2 + 2])
 
 
-    def add(self, idx: int, val: int) -> None:
-        self._add(0, 0, self.n - 1, idx, val)
-    def _add(self, o: int, l: int, r: int, idx: int, val: int) -> None:
+    # 更新单点
+    def update(self, idx: int, val: int) -> None:
+        self._update(0, 0, self.n - 1, idx, val)
+    def _update(self, o: int, l: int, r: int, idx: int, val: int) -> None:
         if l == r:
             self.sum[o] += val
             self.min[o] += val
@@ -28,16 +36,12 @@ class SegTree:
             return
         m = (l + r) // 2
         if idx <= m:
-            self._add(o * 2 + 1, l, m, idx, val)
+            self._update(o * 2 + 1, l, m, idx, val)
         else:
-            self._add(o * 2 + 2, m + 1, r, idx, val)
+            self._update(o * 2 + 2, m + 1, r, idx, val)
         self.sum[o] = self.sum[o * 2 + 1] + self.sum[o * 2 + 2]
         self.min[o] = min(self.min[o * 2 + 1], self.min[o * 2 + 2])
         self.max[o] = max(self.max[o * 2 + 1], self.max[o * 2 + 2])
-    
-
-    # 更新单点sum
-    def update_sum():...
 
 
     # 查找区间sum
@@ -55,17 +59,13 @@ class SegTree:
         return res
 
 
-    # 更新单点min
-    def update_min():...
-
-
     # 查找区间min
     def query_min(self, L: int, R: int) -> int:
         return self._query_min(0, 0, self.n - 1, L, R)
     def _query_min(self, o: int, l: int, r: int, L: int, R: int) -> int:
         if L <= l and r <= R:
             return self.min[o]
-        res = 0
+        res = inf
         m = (l + r) // 2
         if L <= m:
             res = min(res, self._query_min(o * 2 + 1, l, m, L, R))
@@ -74,29 +74,13 @@ class SegTree:
         return res
 
 
-    # 更新单点max
-    def update_max(self, idx: int, val: int) -> None:
-        self._update_max(0, 0, self.n - 1, idx, val)
-    def _update_max(self, o: int, l: int, r: int, idx: int, val: int) -> None:
-        if l == r:
-            self.nums[idx] = val
-            self.max[o] = val
-            return
-        m = (l + r) // 2
-        if idx <= m:
-            self._update_max(o * 2 + 1, l, m, idx, val)
-        else:
-            self._update_max(o * 2 + 2, m + 1, r, idx, val)
-        self.max[o] = max(self.max[o * 2 + 1], self.max[o * 2 + 2])
-
-
     # 查找区间max
     def query_max(self, L: int, R: int) -> int:
         return self._query_max(0, 0, self.n - 1, L, R)
     def _query_max(self, o: int, l: int, r: int, L: int, R: int) -> int:
         if L <= l and r <= R:
             return self.max[o]
-        res = 0
+        res = -inf
         m = (l + r) // 2
         if L <= m:
             res = max(res, self._query_max(o * 2 + 1, l, m, L, R))
