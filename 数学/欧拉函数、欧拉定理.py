@@ -9,6 +9,9 @@ else:              a^b = a^(b % phi(m) + phi(m)) % m
 
 """
 
+# phi(n) 表示小于等于 n 和 n 互质的数的个数
+# 如果 n 为质数，phi(n) = n - 1
+
 def phi(x):
     s = x
     if x == 1:
