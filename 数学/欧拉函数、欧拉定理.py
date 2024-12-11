@@ -13,17 +13,14 @@ else:              a^b = a^(b % phi(m) + phi(m)) % m
 # 如果 n 为质数，phi(n) = n - 1
 
 def phi(x):
-    s = x
-    if x == 1:
-        return 1
-    c = set()
-    for i in range(2, x):
-        while x % i == 0:
-            c.add(i)
-            x //= i
+    res = x
+    i = 2
+    while i * i <= x:
+        if x % i == 0:
+            res = res // i * (i - 1)
+            while x % i == 0:
+                x //= i
+        i += 1
     if x > 1:
-        c.add(x)
-    for y in c:
-        s *= y - 1
-        s //= y
-    return s
+        res = res // x * (x - 1)
+    return res
