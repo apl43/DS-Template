@@ -12,15 +12,15 @@ else:              a^b = a^(b % phi(m) + phi(m)) % m
 # phi(n) 表示小于等于 n 和 n 互质的数的个数
 # 如果 n 为质数，phi(n) = n - 1
 
-def phi(x):
-    res = x
+def phi(n):
+    res = n
     i = 2
-    while i * i <= x:
-        if x % i == 0:
+    while i * i <= n:
+        if n % i == 0:
             res = res // i * (i - 1)
-            while x % i == 0:
-                x //= i
+            while n % i == 0:
+                n //= i
         i += 1
-    if x > 1:
-        res = res // x * (x - 1)
+    if n > 1:
+        res = res // n * (n - 1)
     return res
