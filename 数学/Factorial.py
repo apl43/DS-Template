@@ -1,15 +1,13 @@
 class Factorial:
     def __init__(self, MX, MOD):
-        # i 的阶乘
-        fac = [1] * MX
-        for i in range(1, MX):
+        fac = [1] * (MX + 1) # i 的阶乘
+        inv = [0] + [1] * MX # i 的逆元
+        inv_fac = [1] * (MX + 1) # i 的阶乘的逆元
+        for i in range(2, MX + 1):
             fac[i] = fac[i - 1] * i % MOD
-        # i 的阶乘的逆元
-        inv_fac = [0] * MX
-        inv_fac[-1] = pow(fac[-1], -1, MOD)
-        for i in range(MX - 2, -1, -1):
-            inv_fac[i] = inv_fac[i + 1] * (i + 1) % MOD
-        self.fac, self.inv_fac, self.MOD = fac, inv_fac, MOD
+            inv[i] = (MOD - MOD // i) * inv[MOD % i] % MOD
+            inv_fac[i] = inv_fac[i - 1] * inv[i] % MOD
+        self.fac, self.inv, self.inv_fac, self.MOD = fac, inv, inv_fac, MOD
 
     def comb(self, n, k):
         if n < 0 or k < 0 or n < k:
