@@ -18,7 +18,7 @@ def dot_product(v1: Vector, v2: Vector) -> float:
 
 # 叉乘
 def cross_product(v1: Vector, v2: Vector) -> Vector:
-    return v1.x * v2.x - v1.y * v2.y
+    return v1.x * v2.y - v1.y * v2.x
 
 # 两点距离
 def distance(p1: Point, p2: Point) -> float:
