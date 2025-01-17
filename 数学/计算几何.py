@@ -3,11 +3,20 @@ from math import sqrt
 
 class Point:
     def __init__(self, x: float, y: float) -> None:
-        self.x = x
-        self.y = y
+        self.x, self.y = x, y
+    # 加
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+    # 减
+    def __sub__(self, other):
+        return Point(self.x - other.x, self.y - other.y)
+    # 乘 (必须写成 Point * num)
+    def __mul__(self, other):
+        return Point(self.x * other, self.y * other)
+    def __repr__(self):
+        return f"{self.x, self.y}"
 
-
-Vector = Point
+Vector = Point    
 # 获取向量
 def get_vec(p1: Point, p2: Point) -> Vector:
     return Vector(p2.x - p1.x, p2.y - p1.y)
