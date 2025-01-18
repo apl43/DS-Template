@@ -14,7 +14,7 @@ class Point:
     def __mul__(self, other):
         return Point(self.x * other, self.y * other)
     def __repr__(self):
-        return f"{self.x, self.y}"
+        return f"({self.x}, {self.y})"
 
 Vector = Point    
 # 获取向量
