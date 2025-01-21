@@ -1,5 +1,5 @@
 class Hash:
-    def __init__(self, s, BASE=10241161243, MOD=10**9+7):
+    def __init__(self, s, BASE=9971161243, MOD=10**9+7):
         self.n = len(s)
         self.BASE = BASE
         self.MOD = MOD
