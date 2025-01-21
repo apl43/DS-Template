@@ -5,30 +5,30 @@ n = None
 edges = None
 
 
-f = [[inf] * n for _ in range(n)]
+g = [[inf] * n for _ in range(n)]
 for i in range(n):
-    f[i][i] = 0
+    g[i][i] = 0
 for x, y, w in edges:
-    f[x][y] = w
-    f[y][x] = w
+    g[x][y] = w
+    g[y][x] = w
 
 
 for k in range(n):
     for i in range(n):
         for j in range(n):
-            s = f[i][k] + f[k][j]
-            if s < f[i][j]:
-                f[i][j] = s
+            s = g[i][k] + g[k][j]
+            if s < g[i][j]:
+                g[i][j] = s
 
 
 def add(x, y, w):
-    if w >= f[x][y]:
+    if w >= g[x][y]:
         return
     for i in range(n):
         for j in range(n):
-            if f[i][j] > f[i][x] + w + f[y][j]:
-                f[i][j] = f[i][x] + w + f[y][j]
+            if g[i][j] > g[i][x] + w + g[y][j]:
+                g[i][j] = g[i][x] + w + g[y][j]
 
 
 def find(start, end):
-    return f[start][end] if f[start][end] != inf else -1
+    return g[start][end] if g[start][end] != inf else -1
