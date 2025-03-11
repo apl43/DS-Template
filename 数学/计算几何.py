@@ -34,7 +34,7 @@ def distance(p1: Point, p2: Point) -> float:
     return sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
 
 # p1 到 p2p3 距离
-def point2line_distance(p1: Point, p2: Point, p3: Point) -> float:
+def point2line(p1: Point, p2: Point, p3: Point) -> float:
     cross = cross_product(get_vec(p1, p2), get_vec(p1, p3))
     return abs(cross) / distance(p2, p3)
 
